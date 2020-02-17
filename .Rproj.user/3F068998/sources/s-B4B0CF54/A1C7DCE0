@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581981011157.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2100890984",
+    "id" : "A1C7DCE0",
+    "lastKnownWriteTime" : 1581981030,
+    "last_content_update" : 1581981030229,
+    "path" : "~/R/Big-Data-Project-2/Clean Folder/file specific info.R",
+    "project_path" : "Clean Folder/file specific info.R",
+    "properties" : {
+        "cursorPosition" : "0,20",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
