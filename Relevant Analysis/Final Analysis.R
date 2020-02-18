@@ -85,7 +85,8 @@ str(t)
 for(i in 1:length(m$LOCATION)){               
   for(j in 1:length(unique.country)){
 
-i<-56
+i<-1
+j<-1
     if(m$LOCATION[i] == unique.country[j]){
       data.temp<-subset(m,subset = LOCATION ==unique.country[j])
       model.t<-lm(data.temp$TIME[i]~data.temp$Value[i])
