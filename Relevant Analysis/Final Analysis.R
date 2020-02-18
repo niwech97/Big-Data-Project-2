@@ -15,7 +15,7 @@ m<-read.csv(file=paste(path.rd,"/","Measles_ALL.csv",sep=""))
 m<-select(m, -c("SUBJECT", "INDICATOR", "MEASURE", "Flag.Codes",
                            "FREQUENCY"))
 
-#visualize m
+#visualize m (initial)
 plot(m$Value~m$TIME,xlab="Year",ylab="Vaccinated Children(%)",
      main="Global Child Vaccination Rate 1980-2018",
      las=1, pch=16,col="black")
@@ -45,26 +45,35 @@ model.1.sum <- summary(model.1)
 #attempt to save model.1.sum as a CSV
 write.csv(model.1.sum, paste(path.clean,"Total Linear Regression.csv",sep="/"))
 
+#this is the plots of the linear regression
 plot(lm(m$TIME~m$Value))
-##create a loop for this to be done on every country
-# first make one for the entire dataset just like we did above
-#
-unique.country<-unique(m$LOCATION)
+#create a loop for each country to have a plot of vaccination rates over time
 
+#we created an object with only the names of the countries we are using
+unique.country<-unique(m$LOCATION)  
 
-for(i in 1:length(m$LOCATION)){
+#we used a nested loop structure to accomplish our loop.
+#first we started a counter to do something in every row of our dataset
+for(i in 1:length(m$LOCATION)){               
+#then we used a second counter to utilize our unique country list
 for(ctr in 1:length(unique.country)){
+#within that counter we created an if statement to extract only 
+#the data from one country at a time 
  if(m$LOCATION[i] == unique.country[ctr]){
+#we stored the subset of one country at a time in a temporary object
   graph.temp<-subset(m,subset = LOCATION ==unique.country[ctr])
+#then we opened a PDF file to save it as the name of the country in our Relevant Figures folder
   pdf(file=paste(path.fingraph,"/",m$LOCATION[i],".pdf",sep=""))
+#Finally we plotted the graph of each countries vaccination rate over time
   plot(graph.temp$TIME,graph.temp$Value,
        main=unique.country[ctr],xlab="Year",ylab= "Vaccination Rate (%)",
        pch=16, las=1, col="blue")
+#and turned off the device
 dev.off()
 }}}
 
 #we want to also do a regression analysis
-#first we create a table that can house the results
+#first we create an object that can house the results
 
 result.storage<-rep(NA,length(unique.country))
 is.list(c(result.storage)
@@ -75,19 +84,8 @@ table(list)
 
 table(result.storage,unique.country)
 table
-#IT WORKS
 
 
 
 
 
-# save for later to edit
-   #for(i in 1:length(m$LOCATION)){
-   ctr<-1
-   i<-1
-    if(dataset$TIME[i] == unique.years[ctr]){
-     graph.temp<-subset(dataset,subset = TIME==unique.years[ctr])
-     pdf(file=paste(path.fingraph,"/",dataset$TIME[i],".pdf",sep=""))
-     plot(graph.temp$Value.y,graph.temp$Value.x,main=unique.years[ctr],xlab="%of Children Vaccinated",ylab= "GDP in USD")}
-   dev.off()
-      }}

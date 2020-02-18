@@ -84,3 +84,5 @@ dev.off()
 # graph these results and save coefficients
 
 for(i in nrow())
+# lol no we can't
+# try again tomorrow!

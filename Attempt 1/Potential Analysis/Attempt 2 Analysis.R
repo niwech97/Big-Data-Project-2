@@ -1,4 +1,4 @@
-# Attempt 2 potan GDP SCC vacc
+# Attempt 2 potential analysis GDP small clean child vacc
 
 
 
@@ -7,20 +7,25 @@
 table(GDP15$LOCATION)
 table(MCR15$LOCATION)
 
-factor(GDP15.cleanedfinally$LOCATION)
 
 
-length(MCR15$LOCATION) #these dont need to be the same as our defined factors are the same
-length(GDP15$LOCATION)   #therefore we can just remove our NA factors when making the linear model
 
+length(MCR15$LOCATION) #these dont need to be the same as our defined factors are the same...?
+length(GDP15$LOCATION) #therefore we can just remove our NA factors when making the linear model
+
+#recleaning
 GDP15<-select(GDP15, -c("SUBJECT", "INDICATOR", "MEASURE", "Flag Codes",
                       "FREQUENCY"))
+#forcing into factor
 GDP15.time<-as.factor(GDP15$TIME)
 
-
+#attempt to use the na.omit function
 GDP15.cleanedfinally<-na.omit(GDP15)
+#It worked, sort of
 GDP15.cleanedfinally
 
+
+#recleaning and doing the same to the other dataset
 MCR15<-select(MCR15, -c("SUBJECT", "INDICATOR", "MEASURE", "Flag Codes",
                       "FREQUENCY"))
 MCR15.time<-as.factor(MCR15$TIME)
@@ -29,11 +34,15 @@ MCR15.cleanedfinally<-na.omit(MCR15)
 
 MCR15.cleanedfinally
 
+factor(GDP15.cleanedfinally$LOCATION)
+factor(MCR15.cleanedfinally$LOCATION)
+
+#making our csv files
 write.csv(MCR15.cleanedfinally,file=paste(path.clean,"Measles Child Vaccine Rates 15-18cleaned finally.csv",sep="/"))
 
 write.csv(GDP15.cleanedfinally,file=paste(path.clean,"GDP by country 15-18cleanedfinally.csv",sep="/"))
 
-
+#we made these before we used the omit function
 write.csv(MCR15,file=paste(path.clean,"Measles Child Vaccine Rates 15-18.csv",sep="/"))
 
 write.csv(GDP15,file=paste(path.clean,"GDP by country 15-18.csv",sep="/"))
@@ -99,7 +108,7 @@ dev.off()
 # start with one Year
 # explanatory variable = GDP, response = vaccine rate
 
-#we need to create an amalgamate dataset with 3 columns
+# we need to create an amalgamate dataset with 3 columns
 # First column will be a combo year and country EXAMPLE(AUT15)
 # Second column will be child vax rates Example (89)
 # Third column will be GDP Example (40000000)
@@ -110,6 +119,7 @@ dataset<-read.csv(file=paste(path.clean,"Final Dataset.csv",sep="/"))
 #dataset$value.x is GDP
 #datset$value.y is Child Vax rates
 
+#WHAT FOLLOWS WAS OUR INITIAL ATTEMPT AT BUILDING A LOOP
 library(ggplot2)
 rs<-rep(NA, length(dataset$X))
 rs$results<-NA
@@ -141,6 +151,9 @@ dev.off()
 
  # in case of A
 #####------ALMOST FUNCTIONING LOOP--------#########
+
+#we have decided we actually need two counters to be involved, one following along with the data set
+#and the other following along with the unique years to create the correct graphs
  for(i in 1:length(dataset$X)){
  for(ctr in 1:length(unique.years)){
  if(dataset$TIME[i] == unique.years[ctr]){
@@ -175,3 +188,4 @@ write.csv(paste(path.clean,"/",output.file.names[ctr],".csv",sep=""))
 
 
  #---------attempt to merge sets-----------
+#(seen in bleached data document)
