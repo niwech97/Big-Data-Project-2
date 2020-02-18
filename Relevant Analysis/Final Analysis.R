@@ -46,7 +46,7 @@ model.1.sum <- summary(model.1)
 write.csv(model.1.sum, paste(path.clean,"Total Linear Regression.csv",sep="/"))
 
 plot(lm(m$TIME~m$Value))
-#create a loop for this to be done on every country
+##create a loop for this to be done on every country
 # first make one for the entire dataset just like we did above
 #
 unique.country<-unique(m$LOCATION)
@@ -58,10 +58,26 @@ for(ctr in 1:length(unique.country)){
   graph.temp<-subset(m,subset = LOCATION ==unique.country[ctr])
   pdf(file=paste(path.fingraph,"/",m$LOCATION[i],".pdf",sep=""))
   plot(graph.temp$TIME,graph.temp$Value,
-       main=unique.country[ctr],xlab="Year",ylab= "Vaccination Rate (%)")
+       main=unique.country[ctr],xlab="Year",ylab= "Vaccination Rate (%)",
+       pch=16, las=1, col="blue")
 dev.off()
 }}}
-?dev.list
+
+#we want to also do a regression analysis
+#first we create a table that can house the results
+
+result.storage<-rep(NA,length(unique.country))
+is.list(c(result.storage)
+length(unique.country)
+
+list <- c(result.storage, unique.country)
+table(list)
+
+table(result.storage,unique.country)
+table
+#IT WORKS
+
+
 
 
 
@@ -72,7 +88,6 @@ dev.off()
     if(dataset$TIME[i] == unique.years[ctr]){
      graph.temp<-subset(dataset,subset = TIME==unique.years[ctr])
      pdf(file=paste(path.fingraph,"/",dataset$TIME[i],".pdf",sep=""))
-     plot(graph.temp$Value.y,graph.temp$Value.x,main=unique.years[ctr],
-          xlab="Year",ylab= "Vaccination Rate")}
+     plot(graph.temp$Value.y,graph.temp$Value.x,main=unique.years[ctr],xlab="%of Children Vaccinated",ylab= "GDP in USD")}
    dev.off()
       }}
