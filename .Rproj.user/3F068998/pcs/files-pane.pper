@@ -1,9 +1,13 @@
 {
-    "path" : "~/R/Big-Data-Project-2/Relevant Graphics",
+    "path" : "~/R/Big-Data-Project-2/Attempt 1/Figures of interest",
     "sortOrder" : [
         {
-            "ascending" : true,
+            "ascending" : false,
             "columnIndex" : 2
+        },
+        {
+            "ascending" : false,
+            "columnIndex" : 4
         }
     ]
 }

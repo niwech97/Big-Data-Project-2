@@ -75,24 +75,21 @@ dev.off()
 #we want to also do a regression analysis
 #first we create an object that can house the results
 
-t <- matrix(NA, nrow = 44)
+t <- matrix(NA, nrow = length(unique.country))
 colnames(t) <- c("Intercept")
 str(t)
 
+unique.country
 
-
-#attempt at regression
-for(i in 1:length(t)){               
-  for(j in 1:length(unique.country)){
-    if(m$LOCATION[i] == unique.country[j]){
-      data.temp<-subset(m,subset = LOCATION ==unique.country[j])
-      model.t<-lm(data.temp$Value[i]~data.temp$TIME[i])
+#attempt at regression for each country 
+for(i in 1:length(unique.country)){  
+  #creating smaller datasets organized by countries
+      data.temp<-subset(m,subset = LOCATION ==unique.country[i])
+      model.t<-lm(data.temp$Value~data.temp$TIME)
       t[i]<- model.t$coefficients[1]
-     }
+}#closing loop
+ 
 
-  }}
-i<-1
-j<-4
 t
 ?lm.fit
 length(t)
@@ -100,5 +97,7 @@ length(t)
   }}}
 head(unique.country)
 head(t)
-temp.t<-table(c(t[,1],countrylist))
+d.all <- cbind.data.frame(countries = unique.country, corr.coef = t)
+head(d.all)
+da<-table(t
 countrylist<-as.list(unique.country)
